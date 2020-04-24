@@ -1,0 +1,12 @@
+ATMStatusMonitoring/bin/
+ATMStatusMonitoring/obj/
+ATMStatusMonitoring/Properties/
+ATMStatusMonitoring/*.ldf
+ATMStatusMonitoring/*.csproj
+ATMStatusMonitoring/*.user
+ATMStatusMonitoring/*.config
+ATMStatusMonitoring/App.xaml
+ATMStatusMonitoring/App.xaml.cs
+packages/
+.vs/
+*.sln
