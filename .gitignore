@@ -5,6 +5,7 @@ ATMStatusMonitoring/*.ldf
 ATMStatusMonitoring/*.csproj
 ATMStatusMonitoring/*.user
 ATMStatusMonitoring/*.config
+ATMStatusMonitoring/*.mdf
 ATMStatusMonitoring/App.xaml
 ATMStatusMonitoring/App.xaml.cs
 packages/

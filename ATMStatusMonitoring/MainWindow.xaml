@@ -18,13 +18,13 @@
                     <Label Content="Last Name" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top"/>
                     <Label Content="Serial number" HorizontalAlignment="Left" Margin="10,108,0,0" VerticalAlignment="Top"/>
                     <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,292,0,0" Height="26" Width="53"/>
-                    <TextBox x:Name="NameATM" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="10"/>
+                    <TextBox x:Name="NameATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="10"/>
                     <TextBox x:Name="LastNameATM" HorizontalAlignment="Left" Height="23" Margin="10,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="10"/>
-                    <TextBox x:Name="SerialNumberATM" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="15"/>
-                    <TextBox x:Name="AddressATM" HorizontalAlignment="Left" Height="103" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251"/>
-                    <Button x:Name="AddDataATM" Content="Add ATM" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="AddDataATM_Click"/>
-                    <Button x:Name="UpdateDataATM" Content="Update AMT" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="UpdateDataATM_Click"/>
-                    <DataGrid x:Name="DataATM" Grid.Column="1" Margin="0,0,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATM_MouseDoubleClick" AutoGenerateColumns="False">
+                    <TextBox x:Name="SerialNumberATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="15"/>
+                    <TextBox x:Name="AddressATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="103" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251"/>
+                    <Button x:Name="AddDataATM" Content="Add ATM" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="AddDataATM_Click" IsEnabled="False"/>
+                    <Button x:Name="UpdateDataATM" Content="Update AMT" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="UpdateDataATM_Click" IsEnabled="False"/>
+                    <DataGrid x:Name="DataATM" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATM_MouseDoubleClick" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Number}"/>
@@ -37,7 +37,7 @@
                             <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="DeleteDataATM" Content="Delete ATM" HorizontalAlignment="Left" Margin="186,76,0,0" VerticalAlignment="Top" Width="75" Click="DeleteDataATM_Click"/>
+                    <Button x:Name="DeleteDataATM" Content="Delete ATM" HorizontalAlignment="Left" Margin="186,76,0,0" VerticalAlignment="Top" Width="75" Click="DeleteDataATM_Click" IsEnabled="False"/>
                     <GroupBox Header="Network Settings" Height="125" Margin="10,162,10,0" VerticalAlignment="Top">
                         <StackPanel>
                             <Grid>
@@ -46,14 +46,16 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Content="IP" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="20" RenderTransformOrigin="5.95,0.5" Grid.Column="0"/>
-                                <TextBox x:Name="ipATM" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLength="15" Grid.Column="0" Margin="0,26,0,0"/>
+                                <TextBox x:Name="ipATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLength="15" Grid.Column="0" Margin="0,26,0,0"/>
                                 <Label Content="Gateway" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="55" Grid.Column="0" Margin="0,46,0,0"/>
-                                <TextBox x:Name="GatewayATM" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLength="15" Grid.Column="0" Margin="0,72,0,0"/>
+                                <TextBox x:Name="GatewayATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLength="15" Grid.Column="0" Margin="0,72,0,0"/>
                                 <Label Content="Mask" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,-3,0,0" Height="26" Width="38" Grid.Column="1"/>
-                                <TextBox x:Name="MaskATM" HorizontalAlignment="Left" Height="23" Margin="2,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" MaxLength="15" Grid.Column="1"/>
+                                <TextBox x:Name="MaskATM" TextChanged="textChangedEventATM" HorizontalAlignment="Left" Height="23" Margin="2,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" MaxLength="15" Grid.Column="1"/>
                             </Grid>
                         </StackPanel>
                     </GroupBox>
+                    <TextBox x:Name="searchATMText" Grid.Column="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="350"/>
+                    <Button x:Name="searchATMButton" Content="Search" Grid.Column="1" HorizontalAlignment="Left" Margin="355,3,0,0" VerticalAlignment="Top" Width="75" Click="searchATMButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Check status ATM" x:Name="ATMStatusTab" IsSelected="True">
@@ -69,7 +71,7 @@
                     <Label Content="Comment" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,163,0,0"/>
                     <TextBox x:Name="CommentStatus" HorizontalAlignment="Left" Height="232" Margin="10,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251"/>
                     <Button x:Name="UpdateATMStatus" Content="Update status" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top" Click="UpdateATMStatus_Click"/>
-                    <DataGrid x:Name="DataATMStatus" Grid.Column="1" Margin="0,0,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATMStatus_MouseDoubleClick" AutoGenerateColumns="False">
+                    <DataGrid x:Name="DataATMStatus" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATMStatus_MouseDoubleClick" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Number}"/>

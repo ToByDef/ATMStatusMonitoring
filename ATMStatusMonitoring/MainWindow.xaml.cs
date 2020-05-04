@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Linq;
 
 namespace ATMStatusMonitoring
 {
     public partial class MainWindow : Window
     {
         CheckID check = new CheckID();
-        List<ATM> atm = new List<ATM>();
-        List<ATMStatus> atmStatus = new List<ATMStatus>();
         DataAccess da = new DataAccess();
         UserAccess userAccess = new UserAccess();
         User user = new User();
+        DataSearch dataSearch = new DataSearch();
 
         public MainWindow(string login, string pass)
         {
@@ -21,14 +22,12 @@ namespace ATMStatusMonitoring
 
         private void UpdateDataGridATM()   //update DataGrid
         {
-            atm = da.GetATM();
-            DataATM.ItemsSource = atm;
+            DataATM.ItemsSource = da.GetATM();
         }
 
         private void UpdateDataGridATMStatus()  //update DataGridStatus
         {
-            atmStatus = da.GetATMStatus();
-            DataATMStatus.ItemsSource = atmStatus;
+            DataATMStatus.ItemsSource = da.GetATMStatus();
         }
 
         private void AddDataATM_Click(object sender, RoutedEventArgs e)
@@ -122,5 +121,18 @@ namespace ATMStatusMonitoring
             }
         }
         #endregion
+
+        private void textChangedEventATM(object sender, TextChangedEventArgs e)
+        {
+            TextBox[] textboxesATM = { NameATM, SerialNumberATM, ipATM, GatewayATM, MaskATM, AddressATM };
+            AddDataATM.IsEnabled = textboxesATM.All(tb => !string.IsNullOrEmpty(tb.Text));
+            UpdateDataATM.IsEnabled = textboxesATM.All(tb => !string.IsNullOrEmpty(tb.Text));
+            DeleteDataATM.IsEnabled = !string.IsNullOrEmpty(NameATM.Text);
+        }
+
+        private void searchATMButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataATM.ItemsSource = dataSearch.SearchATM(searchATMText.Text);
+        }
     }
 }

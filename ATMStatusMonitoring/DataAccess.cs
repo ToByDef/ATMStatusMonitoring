@@ -65,7 +65,7 @@ namespace ATMStatusMonitoring
                 checkId = check.CheckIDATM(name);
                 if (check.CheckIDStatus(checkId))
                 {
-                    // Обновление текущей строки
+                    // Update current status
                     List<ATMStatus> Status = new List<ATMStatus>
                     {
                         new ATMStatus { Id = checkId, Status = status, Date = date, Editor = user, Comment = comment}
@@ -74,7 +74,7 @@ namespace ATMStatusMonitoring
                 }
                 else
                 {
-                    // Добавление новой записи если есть запись в ATM
+                    // Add new status
                     if (checkId != 0)
                     {
                         List<ATMStatus> Status = new List<ATMStatus>
@@ -84,7 +84,7 @@ namespace ATMStatusMonitoring
                         connection.Execute("dbo.InsertStatus @Id, @Status, @Date, @Editor, @Comment", Status);
                     }
                     else
-                        MessageBox.Show("Нет такого банкомата!!!");
+                        MessageBox.Show("ATM does not exist!!!");
                 }
             }
         }
@@ -96,20 +96,27 @@ namespace ATMStatusMonitoring
                 if (check.CheckIDATM(name) != 0)
                     connection.Execute("dbo.DeleteATMStatus @Id = " + check.CheckIDATM(name));
                 else
-                    MessageBox.Show("Нет такого банкомата для удаления его статуса!!!");
+                    MessageBox.Show("ATM does not exist!!!");
             }
         }
 
         public void UpdateATM(string name, string lastName, int serialNumber, string ip, string mask, string gateway, string address)
         {
             ClearNewNumber(check.CheckNewNumber(name));
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            if (check.CheckIDATM(name) != 0)
             {
-                List<ATM> atm = new List<ATM>
+                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
                 {
-                new ATM{ Number = name, LastNumber = lastName, SerialNumber = serialNumber, IP = ip, Mask = mask, Gateway = gateway, Address = address }
-                };
-                connection.Execute("dbo.UpdateATM @Number, @LastNumber, @SerialNumber, @IP, @Mask, @Gateway, @Address", atm);
+                    List<ATM> atm = new List<ATM>
+                    {
+                        new ATM{ Number = name, LastNumber = lastName, SerialNumber = serialNumber, IP = ip, Mask = mask, Gateway = gateway, Address = address }
+                    };
+                    connection.Execute("dbo.UpdateATM @Number, @LastNumber, @SerialNumber, @IP, @Mask, @Gateway, @Address", atm);
+                }
+            }
+            else
+            {
+                MessageBox.Show("ATM does not exist!!!");
             }
         }
 
