@@ -4,11 +4,11 @@ using Dapper;
 
 namespace ATMStatusMonitoring
 {
-    class UserAccess
+    internal static class UserAccess
     {
-        public User GetUser(string login, string password)
+        internal static User GetUser(string login, string password)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 return connection.Query<User>("dbo.GetUser @Login, @Password", new { login, password }).FirstOrDefault();
             }

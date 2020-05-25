@@ -2,9 +2,9 @@
 
 namespace ATMStatusMonitoring
 {
-    public static class Helper
+    internal static class Connection
     {
-        public static string CnnVal(string name)
+        internal static string CnnVal(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }

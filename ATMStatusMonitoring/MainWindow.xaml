@@ -26,15 +26,15 @@
                     <Button x:Name="UpdateDataATM" Content="Update AMT" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="UpdateDataATM_Click" IsEnabled="False"/>
                     <DataGrid x:Name="DataATM" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATM_MouseDoubleClick" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Number}"/>
-                            <DataGridTextColumn Header="Last Name" Binding="{Binding LastNumber}"/>
-                            <DataGridTextColumn Header="New Name" Binding="{Binding NewNumber}"/>
-                            <DataGridTextColumn Header="Serial number" Binding="{Binding SerialNumber}"/>
-                            <DataGridTextColumn Header="IP" Binding="{Binding IP}"/>
-                            <DataGridTextColumn Header="Mask" Binding="{Binding Mask}"/>
-                            <DataGridTextColumn Header="Gateway" Binding="{Binding Gateway}"/>
-                            <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Number}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Last Name" Binding="{Binding LastNumber}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="New Name" Binding="{Binding NewNumber}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Serial number" Binding="{Binding SerialNumber}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="IP" Binding="{Binding IP}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Mask" Binding="{Binding Mask}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Gateway" Binding="{Binding Gateway}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Address" Binding="{Binding Address}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="DeleteDataATM" Content="Delete ATM" HorizontalAlignment="Left" Margin="186,76,0,0" VerticalAlignment="Top" Width="75" Click="DeleteDataATM_Click" IsEnabled="False"/>
@@ -73,12 +73,12 @@
                     <Button x:Name="UpdateATMStatus" Content="Update status" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top" Click="UpdateATMStatus_Click"/>
                     <DataGrid x:Name="DataATMStatus" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" MouseDoubleClick="DataATMStatus_MouseDoubleClick" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Number}"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Status closing date" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
-                            <DataGridTextColumn Header="Status editor" Binding="{Binding Editor}"/>
-                            <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Number}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding Status}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status closing date" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status editor" Binding="{Binding Editor}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Comment" Binding="{Binding Comment}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DatePicker x:Name="DateChangeStatus" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" SelectedDateFormat="Short"/>

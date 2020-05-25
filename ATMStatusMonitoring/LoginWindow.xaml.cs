@@ -4,8 +4,6 @@ namespace ATMStatusMonitoring
 {
     public partial class LoginWindow : Window
     {
-        UserAccess userAccess = new UserAccess();
-        User user = new User();
         public LoginWindow()
         {
             InitializeComponent();
@@ -13,8 +11,7 @@ namespace ATMStatusMonitoring
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            user = userAccess.GetUser(LoginTextBox.Text, PasswordTextBox.Password);
-            if (user != null)
+            if (UserAccess.GetUser(LoginTextBox.Text, PasswordTextBox.Password) != null)
             {
                 MainWindow main = new MainWindow(LoginTextBox.Text, PasswordTextBox.Password);
                 main.Show();

@@ -10,22 +10,20 @@ namespace ATMStatusMonitoring
     {
         CheckID check = new CheckID();
         DataAccess da = new DataAccess();
-        UserAccess userAccess = new UserAccess();
         User user = new User();
-        DataSearch dataSearch = new DataSearch();
 
         public MainWindow(string login, string pass)
         {
             InitializeComponent();
-            user = userAccess.GetUser(login, pass);
+            user = UserAccess.GetUser(login, pass);
         }
 
-        private void UpdateDataGridATM()   //update DataGrid
+        private void UpdateDataGridATM()
         {
             DataATM.ItemsSource = da.GetATM();
         }
 
-        private void UpdateDataGridATMStatus()  //update DataGridStatus
+        private void UpdateDataGridATMStatus()
         {
             DataATMStatus.ItemsSource = da.GetATMStatus();
         }
@@ -34,15 +32,15 @@ namespace ATMStatusMonitoring
         {
             if (check.CheckIDATM(NameATM.Text) == 0 && check.CheckLastNumber(LastNameATM.Text) == 0)
             {
-                if (LastNameATM.Text == "")
+                if (string.IsNullOrEmpty(LastNameATM.Text))
                 {
-                    da.AddATM(NameATM.Text, Convert.ToInt32(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);   //add new record to ATM database
+                    da.AddATM(NameATM.Text, int.Parse(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);   //add new record to ATM database
                 }
                 else
                 {
                     if (check.CheckIDATM(LastNameATM.Text) != 0)
                     {
-                        da.AddATM(NameATM.Text, LastNameATM.Text, Convert.ToInt32(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);   //add new record to ATM database with LastName
+                        da.AddATM(NameATM.Text, LastNameATM.Text, int.Parse(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);   //add new record to ATM database with LastName
                     }
                     else
                         MessageBox.Show("Invalid entry in Last Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -63,12 +61,12 @@ namespace ATMStatusMonitoring
             UpdateDataGridATMStatus();
         }
 
-        private void UpdateDataATM_Click(object sender, RoutedEventArgs e) //update record ATM database
+        private void UpdateDataATM_Click(object sender, RoutedEventArgs e)
         {
-            if (check.CheckIDATM(LastNameATM.Text) == 0 && LastNameATM.Text != "")
+            if (check.CheckIDATM(LastNameATM.Text) == 0 && !string.IsNullOrEmpty(LastNameATM.Text))
                 MessageBox.Show("Incorrect entry in Last Number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
-                da.UpdateATM(NameATM.Text, LastNameATM.Text, Convert.ToInt32(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);
+                da.UpdateATM(NameATM.Text, LastNameATM.Text, int.Parse(SerialNumberATM.Text), ipATM.Text, MaskATM.Text, GatewayATM.Text, AddressATM.Text);
             UpdateDataGridATM();
         }
 
@@ -132,7 +130,7 @@ namespace ATMStatusMonitoring
 
         private void searchATMButton_Click(object sender, RoutedEventArgs e)
         {
-            DataATM.ItemsSource = dataSearch.SearchATM(searchATMText.Text);
+            DataATM.ItemsSource = DataSearch.SearchATM(searchATMText.Text);
         }
     }
 }

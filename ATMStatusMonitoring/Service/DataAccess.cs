@@ -10,16 +10,16 @@ namespace ATMStatusMonitoring
     class DataAccess
     {
         CheckID check = new CheckID();
-        public List<ATM> GetATM()   //data output method in DataGrid
+        public List<ATM> GetATM()
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb"))) //open new connection
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 return connection.Query<ATM>("dbo.GetATM").ToList(); // procedure call GetATM
             }
         }
-        public List<ATMStatus> GetATMStatus() //data output method in DataGridStatus
+        public List<ATMStatus> GetATMStatus()
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 return connection.Query<ATMStatus>("dbo.GetATMStatus").ToList();
             }
@@ -27,7 +27,7 @@ namespace ATMStatusMonitoring
 
         public void AddATM(string name, string lastName, int serialNumber, string ip, string mask, string gateway, string address)  //method of adding a record when filling Last Name
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 List<ATM> atm = new List<ATM>
                 {
@@ -38,7 +38,7 @@ namespace ATMStatusMonitoring
         }
         public void AddATM(string name, int serialNumber, string ip, string mask, string gateway, string address)  //method of adding a record when empty Last Name
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 List<ATM> atm = new List<ATM>
                 {
@@ -51,7 +51,7 @@ namespace ATMStatusMonitoring
         public void DeleteATM(string name)
         {
             ClearNewNumber(check.CheckNewNumber(name));
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 connection.Execute("dbo.DeleteATM " + name + ", " + check.CheckIDATM(name));
             }
@@ -59,10 +59,9 @@ namespace ATMStatusMonitoring
 
         public void UpdateATMStatus(string name, string status, DateTime date, string user, string comment)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
-                int checkId = 0;
-                checkId = check.CheckIDATM(name);
+                int checkId = check.CheckIDATM(name);
                 if (check.CheckIDStatus(checkId))
                 {
                     // Update current status
@@ -91,7 +90,7 @@ namespace ATMStatusMonitoring
 
         public void DeleteATMStatus(string name)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 if (check.CheckIDATM(name) != 0)
                     connection.Execute("dbo.DeleteATMStatus @Id = " + check.CheckIDATM(name));
@@ -105,7 +104,7 @@ namespace ATMStatusMonitoring
             ClearNewNumber(check.CheckNewNumber(name));
             if (check.CheckIDATM(name) != 0)
             {
-                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+                using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
                 {
                     List<ATM> atm = new List<ATM>
                     {
@@ -122,7 +121,7 @@ namespace ATMStatusMonitoring
 
         public void ClearNewNumber(int id) //clearing New Name by ID
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("ATMDb")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Connection.CnnVal("ATMDb")))
             {
                 connection.Execute("dbo.ClearNewNumber " + id);
             }
