@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Linq;
 
@@ -11,6 +10,8 @@ namespace ATMStatusMonitoring
         CheckID check = new CheckID();
         DataAccess da = new DataAccess();
         User user = new User();
+
+
 
         public MainWindow(string login, string pass)
         {
