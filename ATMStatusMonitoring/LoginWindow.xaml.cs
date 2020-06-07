@@ -31,9 +31,7 @@ namespace ATMStatusMonitoring
             foreach (var item in context.Users)
             {
                 if (item.Login == LoginTextBox.Text && item.Password == PasswordTextBox.Password)
-                {
                     return true;
-                }
             }
             return false;
         }

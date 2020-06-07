@@ -2,6 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using System.Data.Entity;
+using System.IO;
+using System.Collections;
 
 namespace ATMStatusMonitoring
 {
@@ -10,23 +13,32 @@ namespace ATMStatusMonitoring
         CheckID check = new CheckID();
         DataAccess da = new DataAccess();
         User user = new User();
-
+        MyDbContext context;
 
 
         public MainWindow(string login, string pass)
         {
             InitializeComponent();
+
+            context = new MyDbContext();
+            context.ATMs.Load();
+            context.ATMStatuses.Load();
+            DataATM.ItemsSource = context.ATMs.Local.ToBindingList();
+            //TODO: Переделать по base-first с помощью ADO.NET
+                //= context.ATMStatuses.Include("ATM").ToList();
+            //DataATMStatus.ItemsSource = test;
+
             user = UserAccess.GetUser(login, pass);
         }
 
         private void UpdateDataGridATM()
         {
-            DataATM.ItemsSource = da.GetATM();
+            //DataATM.ItemsSource = da.GetATM();
         }
 
         private void UpdateDataGridATMStatus()
         {
-            DataATMStatus.ItemsSource = da.GetATMStatus();
+            //DataATMStatus.ItemsSource = da.GetATMStatus();
         }
 
         private void AddDataATM_Click(object sender, RoutedEventArgs e)
@@ -132,6 +144,11 @@ namespace ATMStatusMonitoring
         private void searchATMButton_Click(object sender, RoutedEventArgs e)
         {
             DataATM.ItemsSource = DataSearch.SearchATM(searchATMText.Text);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            context.Dispose();
         }
     }
 }

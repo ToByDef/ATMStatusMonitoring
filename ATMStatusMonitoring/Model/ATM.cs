@@ -1,4 +1,6 @@
-﻿namespace ATMStatusMonitoring
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ATMStatusMonitoring
 {
     class ATM
     {
