@@ -1,5 +1,6 @@
 # ATMStatusMonitoring
-WPF application for tracking ATM status between bank departments
+WPF приложение для оперирования состоянием банкоматов и передачи этой информации между структурными подразделениями банка.
 
-The application uses `Dapper` and a serviсe-based database `ATMDatabase` to store information about application users, ATMs and their statuses.
-The database path is specified in `app.config` as `ATMDb`
+В приложении используется `Entity Framework` и и база данных `ATMDatabase` для хранения информации о пользователях приложения, банкоматах и их состояниях.
+
+Путь к базе данных указыватся в`app.config` как `ATMDb`
