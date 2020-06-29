@@ -1,4 +1,5 @@
 ATMStatusMonitoring/bin/
 ATMStatusMonitoring/obj/
 ATMStatusMonitoring/*.user
+packages/
 .vs/

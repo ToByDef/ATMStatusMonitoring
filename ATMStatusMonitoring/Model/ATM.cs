@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ATMStatusMonitoring
+﻿namespace ATMStatusMonitoring
 {
     class ATM
     {
@@ -13,7 +11,5 @@ namespace ATMStatusMonitoring
         public string Mask { get; set; }
         public string Gateway { get; set; }
         public string Address { get; set; }
-
-        public virtual ATMStatus ATMStatus { get; set; }
     }
 }
