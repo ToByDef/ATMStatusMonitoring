@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ATMStatusMonitoring"
         mc:Ignorable="d"
-        Title="Login window" Height="150" Width="245" ResizeMode="NoResize">
+        Title="Login window" Height="150" Width="245" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid Margin="0,0,7,4">
         <Label Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="LoginTextBox" Height="25" Margin="102,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
         <PasswordBox x:Name="PasswordTextBox" Margin="102,41,0,0" VerticalAlignment="Top" Height="25" MaxLength="8" HorizontalAlignment="Left" Width="120"/>
-        <Button x:Name="LoginButton" Content="Sing in" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="212" Height="30"/>
+        <Button x:Name="LoginButton" Content="Sing in" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="212" Height="30" Click="LoginButton_Click"/>
     </Grid>
 </Window>
