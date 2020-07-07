@@ -1,7 +1,4 @@
 ﻿using ATMStatusMonitoring.Service;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.Remoting.Contexts;
-using System.Security;
 using System.Windows;
 
 namespace ATMStatusMonitoring
@@ -28,7 +25,7 @@ namespace ATMStatusMonitoring
         {
             if (CheckUser())
             {
-                MainWindow main = new MainWindow(LoginTextBox.Text, PasswordTextBox.Password);
+                MainWindow main = new MainWindow(LoginTextBox.Text);
                 main.Show();
                 this.Close();
             }

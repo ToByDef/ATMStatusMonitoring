@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Migrations\MyDbContextModelSnapshot.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Service\CheckData.cs" />
     <Compile Include="Service\MyDbContext.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>

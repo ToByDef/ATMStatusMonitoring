@@ -8,6 +8,38 @@
         Title="ATMStatusMonitoring" Height="495" Width="800" MinWidth="295" MinHeight="495" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <TabControl Grid.Column="0">
+            <TabItem Header="Check status ATM" x:Name="ATMStatusTab">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="277"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                    <TextBox x:Name="NameATMStatus" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="10"/>
+                    <Label Content="Status ATM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0"/>
+                    <Label Content="Status closing date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,108,0,0"/>
+                    <Label Content="Comment" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,163,0,0"/>
+                    <TextBox x:Name="CommentStatus" HorizontalAlignment="Left" Height="232" Margin="10,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251"/>
+                    <Button x:Name="UpdateATMStatus" Content="Update status" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top"/>
+                    <DataGrid x:Name="DataATMStatus" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Number}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding Status}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status closing date" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Status editor" Binding="{Binding Editor}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Comment" Binding="{Binding Comment}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DatePicker x:Name="DateChangeStatus" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" SelectedDateFormat="Short"/>
+                    <ComboBox x:Name="StatusATM" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="120">
+                        <ComboBoxItem Content="Ремонт" IsSelected="True"/>
+                        <ComboBoxItem Content="Инкассация"/>
+                        <ComboBoxItem Content="Профилактика"/>
+                    </ComboBox>
+                    <Button x:Name="DeleteATMStatus" Content="Delete status" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="77"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Update ATM data" x:Name="ATMDataTab">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -24,7 +56,7 @@
                     <TextBox x:Name="AddressATM" HorizontalAlignment="Left" Height="103" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251" TextChanged="textChangedEventATM"/>
                     <Button x:Name="AddDataATM" Content="Add ATM" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top" Width="75" Height="20" IsEnabled="False" Click="AddDataATM_Click"/>
                     <Button x:Name="UpdateDataATM" Content="Update AMT" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="75" Height="20" IsEnabled="False" Click="UpdateDataATM_Click"/>
-                    <DataGrid x:Name="DataATM" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}">
+                    <DataGrid x:Name="DataATM" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" SelectionChanged="DataATM_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Id}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Number}"/>
@@ -56,38 +88,6 @@
                     </GroupBox>
                     <TextBox x:Name="searchATMText" Grid.Column="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="350"/>
                     <Button x:Name="searchATMButton" Content="Search" Grid.Column="1" HorizontalAlignment="Left" Margin="355,3,0,0" VerticalAlignment="Top" Width="75"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Check status ATM" x:Name="ATMStatusTab" IsSelected="True">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="277"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
-                    <TextBox x:Name="NameATMStatus" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="10"/>
-                    <Label Content="Status ATM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0"/>
-                    <Label Content="Status closing date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,108,0,0"/>
-                    <Label Content="Comment" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,163,0,0"/>
-                    <TextBox x:Name="CommentStatus" HorizontalAlignment="Left" Height="232" Margin="10,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251"/>
-                    <Button x:Name="UpdateATMStatus" Content="Update status" HorizontalAlignment="Left" Margin="186,26,0,0" VerticalAlignment="Top"/>
-                    <DataGrid x:Name="DataATMStatus" Grid.Column="1" Margin="0,26,10,10" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Number}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Status" Binding="{Binding Status}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Status closing date" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Status editor" Binding="{Binding Editor}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Comment" Binding="{Binding Comment}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <DatePicker x:Name="DateChangeStatus" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" SelectedDateFormat="Short"/>
-                    <ComboBox x:Name="StatusATM" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="120">
-                        <ComboBoxItem Content="Ремонт" IsSelected="True"/>
-                        <ComboBoxItem Content="Инкассация"/>
-                        <ComboBoxItem Content="Профилактика"/>
-                    </ComboBox>
-                    <Button x:Name="DeleteATMStatus" Content="Delete status" HorizontalAlignment="Left" Margin="186,51,0,0" VerticalAlignment="Top" Width="77"/>
                 </Grid>
             </TabItem>
         </TabControl>
